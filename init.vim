@@ -8,19 +8,16 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'airblade/vim-gitgutter'
 " NERD tree will be loaded on the first invocation of NERDTreeToggle command
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'kien/ctrlp.vim'
 Plug 'mileszs/ack.vim'
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'tomasr/molokai'
-Plug 'derekwyatt/vim-scala'
 Plug 'easymotion/vim-easymotion'
 Plug 'bling/vim-airline'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-unimpaired'
-Plug 'mattn/webapi-vim'
-Plug 'mattn/gist-vim'
 Plug 'chrisbra/histwin.vim'
 Plug 'amperser/proselint', {'rtp': 'plugins/vim/syntastic_proselint/'}
 Plug 'Yggdroot/indentLine'
@@ -75,8 +72,8 @@ endif
 " search all files for pattern
 " :Ack [options] {pattern} [{directories}]
 "
-" use ripgrep not Ack
 let g:ackprg = 'rg --vimgrep --smart-case'
+
 cnoreabbrev rg Ack
 cnoreabbrev rG Ack
 cnoreabbrev Rg Ack
@@ -89,13 +86,6 @@ cnoreabbrev AG Ack
 " splitjoin
 " gS to split a one line if statement into multiline
 " gJ it join a multiline if statement into one line
-" *****************************************************************************
-" solarized
-" molokai
-" colorschemes
-" *****************************************************************************
-" vim-scala
-" hilight scala file syntax
 " *****************************************************************************
 " vim-easymotion
 " use ,<motion> instead of ,,<motion>
@@ -117,24 +107,6 @@ let g:airline_section_x = ''
 let g:airline_section_y = ''
 " Don't draw all these things I just disabled
 let g:airline_skip_empty_sections = 1
-
-" *****************************************************************************
-" vim-markdown-preview
-" ctrl-m opens a preview in the browser or refresh current preview
-let vim_markdown_preview_hotkey='<C-m>'
-" Display images and refresh on buffer write
-" let vim_markdown_preview_toggle=2
-" Use chrome for the preview
-let vim_markdown_preview_browser='Google Chrome'
-" clean up the html file after showing it
-" let vim_markdown_preview_temp_file=0
-" use grip to generate github style markdown
-let vim_markdown_preview_github=1
-" *****************************************************************************
-" vim-flake8
-" use <F7> to call manually
-" auto call Flake8 on python file save
-" autocmd BufWritePost *.py call Flake8()
 " *****************************************************************************
 " Syntastic
 set statusline+=%#warningmsg#
@@ -160,6 +132,7 @@ let g:syntastic_sql_checkers = []
 " gist-vim
 " set gists to private by default
 let g:gist_post_private = 1
+
 " *****************************************************************************
 " histwin
 " *****************************************************************************
@@ -363,3 +336,33 @@ map <leader>sql :%s/\<\w\+\>/\=synIDattr(synID(line('.'),col('.'),1), 'name')=~'
 
 " Incremental command feedback
 set inccommand=nosplit
+
+" copy current file name (relative/absolute) to system clipboard
+if has("mac") || has("gui_macvim") || has("gui_mac")
+  " relative path  (src/foo.txt)
+  nnoremap <leader>cf :let @*=expand("%")<CR>
+
+  " absolute path  (/something/src/foo.txt)
+  nnoremap <leader>cF :let @*=expand("%:p")<CR>
+
+  " filename       (foo.txt)
+  nnoremap <leader>ct :let @*=expand("%:t")<CR>
+
+  " directory name (/something/src)
+  nnoremap <leader>ch :let @*=expand("%:p:h")<CR>
+endif
+
+" copy current file name (relative/absolute) to system clipboard (Linux version)
+if has("gui_gtk") || has("gui_gtk2") || has("gui_gnome") || has("unix")
+  " relative path (src/foo.txt)
+  nnoremap <leader>cf :let @+=expand("%")<CR>
+
+  " absolute path (/something/src/foo.txt)
+  nnoremap <leader>cF :let @+=expand("%:p")<CR>
+
+  " filename (foo.txt)
+  nnoremap <leader>ct :let @+=expand("%:t")<CR>
+
+  " directory name (/something/src)
+  nnoremap <leader>ch :let @+=expand("%:p:h")<CR>
+endif
