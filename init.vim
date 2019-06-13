@@ -44,6 +44,7 @@ let g:gitgutter_escape_grep = 1
 " NERDTree
 " open/close with Ctrl-e
 map <C-e> :NERDTreeToggle<CR>
+map <leader>nf :NERDTreeFind<CR>
 
 " open NERDTree when starting vim without a file
 " autocmd StdinReadPre * let s:std_in=1
@@ -378,3 +379,35 @@ endif
 
 syntax on
 colorscheme onedark
+
+
+" Toggle quickfix window
+function! GetBufferList()
+  redir =>buflist
+  silent! ls!
+  redir END
+  return buflist
+endfunction
+
+function! ToggleList(bufname, pfx)
+  let buflist = GetBufferList()
+  for bufnum in map(filter(split(buflist, '\n'), 'v:val =~ "'.a:bufname.'"'), 'str2nr(matchstr(v:val, "\\d\\+"))')
+    if bufwinnr(bufnum) != -1
+      exec(a:pfx.'close')
+      return
+    endif
+  endfor
+  if a:pfx == 'l' && len(getloclist(0)) == 0
+      echohl ErrorMsg
+      echo "Location List is Empty."
+      return
+  endif
+  let winnr = winnr()
+  exec(a:pfx.'open')
+  if winnr() != winnr
+    wincmd p
+  endif
+endfunction
+
+nmap <silent> <leader>cl :call ToggleList("Location List", 'l')<CR>
+nmap <silent> <leader>cq :call ToggleList("Quickfix List", 'c')<CR>
