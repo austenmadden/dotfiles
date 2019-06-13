@@ -44,16 +44,17 @@ let g:gitgutter_escape_grep = 1
 " NERDTree
 " open/close with Ctrl-e
 map <C-e> :NERDTreeToggle<CR>
+" Oepn current file in NERDTree
 map <leader>nf :NERDTreeFind<CR>
 
 " open NERDTree when starting vim without a file
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " close vim if the only open window is NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-" when opening a file, close NERDTree
+" when opening a file, DO NOT close NERDTree
 let NERDTreeQuitOnOpen = 0
 " *****************************************************************************
 " vim-buffergator
