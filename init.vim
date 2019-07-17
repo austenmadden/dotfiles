@@ -6,8 +6,7 @@ let mapleader=","
 call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'airblade/vim-gitgutter'
-" NERD tree will be loaded on the first invocation of NERDTreeToggle command
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'kien/ctrlp.vim'
@@ -42,10 +41,17 @@ nmap [h <Plug>GitGutterPrevHunk
 let g:gitgutter_escape_grep = 1
 " *****************************************************************************
 " NERDTree
-" open/close with Ctrl-e
-map <C-e> :NERDTreeToggle<CR>
-" Oepn current file in NERDTree
-map <leader>nf :NERDTreeFind<CR>
+function! NERDTreeToggleFind()
+  " If NERDTree is open in the current buffer
+  if (exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1)
+    exe ":NERDTreeClose"
+  else
+    exe ":NERDTreeFind"
+  endif
+endfunction
+
+" open current file with Ctrl-e
+map <C-e> :call NERDTreeToggleFind()<CR>
 
 " close vim if the only open window is NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
