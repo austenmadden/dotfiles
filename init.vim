@@ -7,6 +7,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'kien/ctrlp.vim'
@@ -416,3 +417,6 @@ endfunction
 
 nmap <silent> <leader>cl :call ToggleList("Location List", 'l')<CR>
 nmap <silent> <leader>cq :call ToggleList("Quickfix List", 'c')<CR>
+
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
