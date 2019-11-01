@@ -10,7 +10,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'jeetsukumaran/vim-buffergator'
-Plug 'kien/ctrlp.vim'
+Plug 'cloudhead/neovim-fuzzy'
 Plug 'mileszs/ack.vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'easymotion/vim-easymotion'
@@ -65,14 +65,9 @@ let NERDTreeQuitOnOpen = 0
 " open with Ctrl-b
 map <C-b> :BuffergatorToggle<CR>
 " *****************************************************************************
-" ctrlp
-" use ctrlp to search for filenames
-"
 " use ripgrep
 if executable('rg')
   set grepprg=rg\ --color=never
-  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-  let g:ctrlp_use_caching = 0
 endif
 " *****************************************************************************
 " ack
@@ -141,6 +136,10 @@ nmap <C-t> :TagbarToggle<CR>
 let g:airline#extensions#ale#enabled = 1
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
+" *****************************************************************************
+" neovim-fuzzy
+" *****************************************************************************
+nnoremap <C-p> :FuzzyOpen<CR>
 " *****************************************************************************
 " END PLUGIN DESCRIPTIONS
 
