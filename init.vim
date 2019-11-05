@@ -246,6 +246,8 @@ set tabstop=2
 au BufRead,BufNewFile *.py,*pyw set shiftwidth=4 tabstop=4
 au Filetype php set shiftwidth=4 tabstop=4
 
+" Autoload file changes
+set autoread
 set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
@@ -403,3 +405,9 @@ nmap <silent> <leader>cq :call ToggleList("Quickfix List", 'c')<CR>
 
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
+
+" I don't want to conceal characters in markdown
+let g:markdown_syntax_conceal = 0
+
+" I'll save it if I want vim!
+set hidden
