@@ -27,12 +27,15 @@ Plug 'vim-scripts/closetag.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'dense-analysis/ale'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 " END PLUG STUFF
 
 " BEGIN PLUGIN DESCRIPTIONS
 " *****************************************************************************
+" coc
+nmap jd :call CocActionAsync('jumpDefinition')
 " vim-gitgutter
 " keymap for moving in hunks
 nmap ]h <Plug>GitGutterNextHunk
