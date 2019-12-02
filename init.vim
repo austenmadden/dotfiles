@@ -409,8 +409,11 @@ nmap <silent> <leader>cq :call ToggleList("Quickfix List", 'c')<CR>
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
 
-" I don't want to conceal characters in markdown
-let g:markdown_syntax_conceal = 0
+" I don't want to conceal characters or fold stuff in markdown
+set conceallevel=0
+let g:vim_markdown_conceal_code_blocks = 0
+let g:vim_markdown_conceal = 0
+let g:vim_markdown_folding_disabled = 1
 
 " I'll save it if I want vim!
 set hidden
