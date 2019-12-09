@@ -28,12 +28,16 @@ Plug 'joshdick/onedark.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'dense-analysis/ale'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'skalnik/vim-vroom'
 
 call plug#end()
 " END PLUG STUFF
 
 " BEGIN PLUGIN DESCRIPTIONS
 " *****************************************************************************
+" vim-vroom
+let g:vroom_use_colors = 1
+let g:vroom_use_terminal = 1
 " coc
 nmap jd :call CocActionAsync('jumpDefinition')
 " vim-gitgutter
