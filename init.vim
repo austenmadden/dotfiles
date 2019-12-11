@@ -421,3 +421,8 @@ let g:vim_markdown_folding_disabled = 1
 
 " I'll save it if I want vim!
 set hidden
+
+" Gotta save that single keystroke!
+map <leader>wq :wq<CR>
+map <leader>w :w<CR>
+map <leader>q :q<CR>
