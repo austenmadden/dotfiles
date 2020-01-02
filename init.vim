@@ -249,6 +249,10 @@ au BufRead,BufNewFile *.c,*h set noexpandtab
 " 1 tab == 2 spaces
 set shiftwidth=2
 set tabstop=2
+
+" apparently I have to be more explicit
+autocmd BufNewFile,BufRead *.ruby,*rake set shiftwidth=2 softtabstop=2 tabstop=2
+
 " except in py and php files
 au BufRead,BufNewFile *.py,*pyw set shiftwidth=4 tabstop=4
 au Filetype php set shiftwidth=4 tabstop=4
