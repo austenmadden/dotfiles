@@ -5,22 +5,18 @@ let mapleader=","
 " BEGIN PLUG STUFF
 call plug#begin('~/.local/share/nvim/plugged')
 
-Plug 'airblade/vim-gitgutter'
-Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/nerdcommenter'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'preservim/nerdtree'
+Plug 'preservim/nerdcommenter'
 Plug 'jeetsukumaran/vim-buffergator'
-Plug 'cloudhead/neovim-fuzzy'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'easymotion/vim-easymotion'
-Plug 'bling/vim-airline'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-unimpaired'
-Plug 'chrisbra/histwin.vim'
 Plug 'Yggdroot/indentLine'
-Plug 'elixir-lang/vim-elixir'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
 Plug 'vim-scripts/closetag.vim'
@@ -83,10 +79,6 @@ endif
 "
 let g:ackprg = 'rg --vimgrep --smart-case'
 
-cnoreabbrev rg Ack
-cnoreabbrev rG Ack
-cnoreabbrev Rg Ack
-cnoreabbrev RG Ack
 cnoreabbrev ag Ack
 cnoreabbrev aG Ack
 cnoreabbrev Ag Ack
@@ -120,12 +112,6 @@ let g:airline_skip_empty_sections = 1
 " gist-vim
 " set gists to private by default
 let g:gist_post_private = 1
-
-" *****************************************************************************
-" histwin
-" *****************************************************************************
-" use leader u to open history browser
-nnoremap <leader>u :Histwin<CR>
 " *****************************************************************************
 " indent guides
 " *****************************************************************************
@@ -144,9 +130,15 @@ let g:airline#extensions#ale#enabled = 1
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 " *****************************************************************************
-" neovim-fuzzy
+" fzf
 " *****************************************************************************
-nnoremap <C-p> :FuzzyOpen<CR>
+nnoremap <C-p> :Files<CR>
+" Open fzf into a modal popup window.
+let g:fzf_layout = { 'window': { 'width': 0.6, 'height': 0.4, 'yoffset': 0.25, 'border': 'rounded' } }
+" Tweak colors
+let g:fzf_colors = { 'border':  ['fg', 'Comment'] }
+" Disable preview pane
+let g:fzf_preview_window = ''
 " *****************************************************************************
 " END PLUGIN DESCRIPTIONS
 
