@@ -21,16 +21,19 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
 Plug 'vim-scripts/closetag.vim'
 Plug 'joshdick/onedark.vim'
-Plug 'sheerun/vim-polyglot'
 Plug 'dense-analysis/ale'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'skalnik/vim-vroom'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 call plug#end()
 " END PLUG STUFF
 
 " BEGIN PLUGIN DESCRIPTIONS
 " *****************************************************************************
+" ctags
+let g:gutentags_ctags_executable='/opt/homebrew/bin/ctags'
+
 " vim-vroom
 let g:vroom_use_colors = 1
 let g:vroom_use_terminal = 1
@@ -408,6 +411,7 @@ nmap <silent> <leader>cq :call ToggleList("Quickfix List", 'c')<CR>
 
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
+filetype plugin on
 
 " I don't want to conceal characters or fold stuff in markdown
 set conceallevel=0
@@ -422,3 +426,23 @@ set hidden
 map <leader>wq :wq<CR>
 map <leader>w :w<CR>
 map <leader>q :q<CR>
+
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Fugitive/Rhubarb annoyance fix
+cnoreabbrev Gbrowse GBrowse
